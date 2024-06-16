@@ -8,6 +8,6 @@ jobs:
     
     steps:
       - name: "Say Hello"
-        run: echo "Hello"
+        run: echo "Hello Daniele!" && exit 1
       - name: "Say Foo"
         run: echo "Foo"
