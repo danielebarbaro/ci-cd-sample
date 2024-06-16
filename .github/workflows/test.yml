@@ -25,6 +25,11 @@ jobs:
           vendor/bin/phpstan analyse src --error-format=checkstyle | cs2pr
           vendor/bin/php-cs-fixer fix src --dry-run --format=checkstyle | cs2pr
 
+      - uses: staabm/annotate-pull-request-from-checkstyle-action@v1
+        with:
+          files: checkstyle.xml
+          notices-as-warnings: true
+
       - name: Run unit tests
         run: vendor/bin/phpunit
 
