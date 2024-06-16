@@ -6,6 +6,8 @@ jobs:
   ci-test:
     runs-on: ubuntu-latest
     
-  steps:
-    - name: "Say Hello"
-      run: echo "Hello"
+    steps:
+      - name: "Say Hello"
+        run: echo "Hello"
+      - name: "Say Foo"
+        run: echo "Foo"
