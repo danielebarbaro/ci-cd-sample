@@ -3,7 +3,7 @@ name: tests
 on: [push]
 
 jobs:
-  ci-test:
+  php-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,7 @@ jobs:
 
       - name:  Run static analysis checks && Check code style
         run: |
-          vendor/bin/phpstan analyse --error-format=checkstyle | cs2pr
+          vendor/bin/phpstan analyse src --error-format=checkstyle | cs2pr
           vendor/bin/php-cs-fixer fix src --dry-run --format=checkstyle | cs2pr
 
       - name: Run unit tests
