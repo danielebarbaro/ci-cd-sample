@@ -1,0 +1,35 @@
+name: tests
+
+on: [push]
+
+jobs:
+  ci-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install PHP
+        uses: "shivammathur/setup-php@v2"
+        with:
+          coverage: "pcov"
+          php-version: "8.3"
+          tools: composer:v2, cs2pr
+
+      - name: Run composer
+        run: composer install --prefer-dist --no-progress --no-ansi --no-interaction
+
+      - name: Check code style
+        run: |
+          vendor/bin/phpcs -q --report=checkstyle | cs2pr
+          vendor/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
+
+      - name: Run static analysis checks
+        run: vendor/bin/phpstan analyse | cs2pr
+
+      - name: Run unit tests
+        run: vendor/bin/phpunit
+
+
+
