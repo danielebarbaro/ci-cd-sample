@@ -1,6 +1,6 @@
 name: tests
 
-on: [push]
+on: push
 
 jobs:
   php-tests:
@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: "actions/checkout@v3"
 
       - name: Install PHP
         uses: "shivammathur/setup-php@v2"
@@ -20,13 +20,13 @@ jobs:
       - name: Run composer
         run: composer install --prefer-dist --no-progress --no-ansi --no-interaction
 
-      - name:  Run static analysis checks && Check code style
+      - name:  Run static analysis checks
         run: |
           vendor/bin/phpstan analyse src --error-format=checkstyle | cs2pr
+
+      - name:  Run Check code style
+        run: |
           vendor/bin/php-cs-fixer fix src --dry-run --format=checkstyle | cs2pr
 
       - name: Run unit tests
         run: vendor/bin/phpunit
-
-
-
