@@ -22,7 +22,7 @@ jobs:
 
       - name:  Run static analysis checks
         run: |
-          vendor/bin/phpstan analyse src --error-format=checkstyle | cs2pr
+          vendor/bin/phpstan analyse src --level=2 --error-format=checkstyle | cs2pr
 
       - name:  Run Check code style
         run: |
